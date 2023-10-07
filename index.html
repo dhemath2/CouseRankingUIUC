@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CourseRank UIUC</title>
+    <link rel="stylesheet" href="styles.css"> <!-- External Stylesheet (not provided in this example) -->
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">CourseRank UIUC</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Browse Courses</a></li>
+            <li><a href="#">Submit a Review</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <h1>Welcome to CourseRank UIUC!</h1>
+        <p>Find and review courses at UIUC based on GPA, amount learned, and enjoyment.</p>
+        <input type="text" placeholder="Search for a course...">
+    </section>
+
+    <!-- Browse Courses -->
+    <section class="browse-courses">
+        <h2>Browse Courses</h2>
+
+        <!-- Filters -->
+        <div class="filters">
+            <h3>Filter by:</h3>
+
+            <!-- By Subject -->
+            <label for="subject">Subject:</label>
+            <select name="subject" id="subject">
+                <option value="cs">Computer Science</option>
+                <!-- ... other subjects ... -->
+            </select>
+
+            <!-- By GPA, Amount Learned, and Enjoyment -->
+            <label for="gpa">GPA:</label>
+            <input type="range" id="gpa" name="gpa" min="0" max="4" step="0.1">
+
+            <label for="amount-learned">Amount Learned:</label>
+            <input type="range" id="amount-learned" name="amount-learned" min="0" max="10">
+
+            <label for="enjoyment">Enjoyment:</label>
+            <input type="range" id="enjoyment" name="enjoyment" min="0" max="10">
+        </div>
+
+        <!-- Course Table -->
+        <table class="course-table">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>GPA</th>
+                    <th>Learned</th>
+                    <th>Enjoyment</th>
+                    <th>Data Points</th>
+                </tr>
+            </thead>
+            <tbody class="course-list">
+                <!-- Course data from Firebase will be populated here by app.js -->
+            </tbody>
+        </table>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <!-- ... social media links ... -->
+        </ul>
+    </footer>
+
+    <!-- Firebase Initialization Script -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+      
+        const firebaseConfig = {
+            apiKey: "AIzaSyCs9lP6Hw5P3OUhXQ7p6i1OcQ3Vn4zUPg8",
+            authDomain: "courserank-uiuc.firebaseapp.com",
+            projectId: "courserank-uiuc",
+            storageBucket: "courserank-uiuc.appspot.com",
+            messagingSenderId: "947944943678",
+            appId: "1:947944943678:web:7abc48ef981892b106216f",
+            measurementId: "G-CGB7SRWW5W"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+    </script>
+    <!-- Your App's Script -->
+    <script src="app.js"></script>
+
+</body>
+
+</html>
