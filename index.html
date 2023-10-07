@@ -67,7 +67,7 @@
                 </tr>
             </thead>
             <tbody class="course-list">
-                <!-- Course data from Firebase will be populated here by app.js -->
+    
             </tbody>
         </table>
 
@@ -87,8 +87,8 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
-      
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
         const firebaseConfig = {
             apiKey: "AIzaSyCs9lP6Hw5P3OUhXQ7p6i1OcQ3Vn4zUPg8",
             authDomain: "courserank-uiuc.firebaseapp.com",
@@ -99,14 +99,34 @@
             measurementId: "G-CGB7SRWW5W"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        import { getDatabase } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+        const db = getFirestore(app);
+
+        async function fetchAndDisplayCourses() {
+            const coursesCol = collection(db, "courses");
+            const courseSnapshot = await getDocs(coursesCol);
+            const courses = courseSnapshot.docs.map(doc => doc.data());
+
+            const courseListElement = document.querySelector('.course-list');
+            courseListElement.innerHTML = ''; // Clear existing rows
+
+            courses.forEach(course => {
+                const courseRow = `
+                    <tr>
+                        <td>${course.courseName}</td>
+                        <td>${course.avgGPA}</td>
+                        <td>${course.avgLearned}</td>
+                        <td>${course.avgEnjoyment}</td>
+                        <td>${course.DataPoints}</td>
+                    </tr>
+                `;
+                courseListElement.innerHTML += courseRow;
+            });
+        }
+
+        // Call the function on page load
+        fetchAndDisplayCourses();
+
     </script>
-    <!-- Your App's Script -->
-    <script src="app.js"></script>
-
 </body>
-
 </html>
